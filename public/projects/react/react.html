@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Card Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="react/style.css">
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Explore the Project</h1>
+    <p>React로 만든 카드 매칭 게임을 모달에서 체험해보세요. 상태 관리, 이벤트 처리, 카드 매칭 로직까지 구현했습니다.</p>
+    <button id="openModal">Play the Game</button>
+  </header>
+
+  <div id="modal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <button class="close" id="closeModal">✕</button>
+      <div id="root"></div>
+    </div>
+  </div>
+
+  <script type="text/babel" src="react/script.js"></script>
+</body>
+</html>

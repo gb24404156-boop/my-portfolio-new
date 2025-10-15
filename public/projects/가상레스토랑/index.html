@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Savory — Modern Restaurant Template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0f14; --panel:#0f151d; --text:#e5e7eb; --muted:#94a3b8; --accent:#d4af37; --accent-2:#f59e0b;
+  --maxw:1200px; --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:"Pretendard",system-ui,sans-serif;line-height:1.6}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block;border-radius:12px}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+/* Header */
+/* Header */
+header{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(11,15,20,.75);
+  backdrop-filter: saturate(1.2) blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  transition: background-color .3s ease-in-out;
+}
+
+/* 스크롤 시 추가될 클래스 */
+header.scrolled {
+  background: var(--panel); /* <-- 이 부분을 수정합니다. */
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.5px}
+.brand .logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#fff3);display:grid;place-items:center;color:#111827;font-weight:800}
+.nav a.button{padding:10px 16px;border:1px solid rgba(255,255,255,.12);border-radius:999px}
+.nav a.button.cta{background:var(--accent);color:#111827;border:none;font-weight:700}
+.menu{display:flex;gap:20px;align-items:center}
+.menu a{opacity:.85}
+.menu a.active,.menu a:hover{opacity:1;color:var(--accent)}
+.hamburger{display:none}
+
+/* Hero */
+.hero{position:relative;overflow:hidden}
+.hero-inner{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding:72px 0}
+.hero h1{font-size:clamp(34px,5vw,54px);line-height:1.1;margin-bottom:14px}
+.hero p{color:var(--muted);margin-bottom:22px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border-radius:999px;background:#10161f;border:1px solid rgba(255,255,255,.08);color:#cbd5e1;font-size:14px}
+.rating{display:flex;align-items:center;gap:10px;color:#fcd34d}
+.hero-card{position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.06)}
+.hero-card img{height:100%;object-fit:cover}
+.hero-card .badge{position:absolute;left:12px;top:12px;background:rgba(16,22,31,.85);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.08);padding:8px 12px;border-radius:12px;font-size:13px}
+
+/* Sections */
+section{padding:72px 0;border-top:1px solid rgba(255,255,255,.06)}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:26px}
+.section-head h2{margin:0;font-size:clamp(24px,3.4vw,38px)}
+.section-head p{margin:0;color:var(--muted)}
+
+/* About */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.card{background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.card h3{margin-bottom:6px}
+
+/* Menu */
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 22px}
+.tabs button{background:#0f151d;border:1px solid rgba(255,255,255,.08);color:#cbd5e1;padding:10px 14px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"],.tabs button:hover{background:var(--accent);color:#111827;border-color:transparent}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.menu-item{display:flex;gap:14px;align-items:flex-start;padding:16px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.06);cursor:pointer;transition:transform .2s}
+.menu-item:hover{transform:scale(1.03)}
+.menu-item img{width:88px;height:88px;object-fit:cover}
+.menu-item h4{margin-bottom:6px}
+.menu-item .price{color:var(--accent)}
+
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.gallery-grid a {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .06);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  aspect-ratio: 16 / 9; /* 이미지 비율을 16:9로 고정하여 통일감을 줍니다. */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); /* 부드러운 그림자를 추가합니다. */
+}
+
+.gallery-grid a:hover {
+  transform: translateY(-8px); /* 마우스를 올리면 위로 살짝 올라갑니다. */
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+}
+.gallery-grid a img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지가 박스를 가득 채우면서 비율을 유지합니다. */
+  display: block;
+}
+.gallery-grid a span {
+  /* "보기" 텍스트 스타일링 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 8px 16px;
+  border-radius: 999px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+.gallery-grid a:hover span {
+  opacity: 1; /* 호버 시에만 "보기" 텍스트가 나타납니다. */
+}
+
+
+
+/* Reviews */
+.slider{position:relative;overflow:hidden}
+.slides{display:flex;gap:16px;overflow:hidden;padding-bottom:8px}
+.slide{min-width:100%;background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:18px;display:none}
+.stars{color:#f59e0b}
+
+/* Contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.contact form{display:grid;gap:12px}
+.contact input,.contact textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f151d;color:#e5e7eb}
+.contact button{padding:12px 18px;border-radius:12px;border:none;background:var(--accent);color:#111827;font-weight:700}
+
+/* Footer */
+footer{padding:40px 0;color:#9aa3af}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(212,175,55,.12);color:#fef3c7;border:1px solid rgba(212,175,55,.35)}
+
+/* Menu Modal */
+#menuModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);justify-content:center;align-items:center;z-index:1000}
+#menuModal > div{background:var(--panel);border-radius:18px;padding:20px;max-width:500px;width:90%;position:relative}
+#menuModal button{position:absolute;top:10px;right:10px;font-size:24px;color:#fff;background:none;border:none;cursor:pointer}
+
+/* Lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;justify-content:center;align-items:center;z-index:1000}
+.lightbox img{max-width:90%;max-height:90%;border-radius:12px}
+.lightbox button{position:absolute;top:20px;right:20px;font-size:24px;color:#fff;background:none;border:none;cursor:pointer}
+
+/* Responsive */
+@media(max-width:980px){
+.hero-inner{grid-template-columns:1fr;gap:28px}
+.about,.contact-grid{grid-template-columns:1fr}
+.gallery-grid{grid-template-columns:repeat(3,1fr)}
+.menu-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:680px){
+.menu{display:none}.hamburger{display:block}
+.gallery-grid{grid-template-columns:repeat(2,1fr)}
+.menu-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+.gallery-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+<nav class="container nav" aria-label="Primary">
+  <a class="brand" href="#home"><span class="logo">S</span>Savory</a>
+  <button class="hamburger" aria-label="메뉴 열기" aria-expanded="false">☰</button>
+  <div class="menu" role="menubar">
+    <a href="#about" role="menuitem">About</a>
+    <a href="#menu" role="menuitem">Menu</a>
+    <a href="#gallery" role="menuitem">Gallery</a>
+    <a href="#reviews" role="menuitem">Reviews</a>
+    <a href="#contact" role="menuitem" class="button">Contact</a>
+    <a href="#reserve" role="menuitem" class="button cta">예약하기</a>
+  </div>
+</nav>
+</header>
+
+<section id="home" class="hero">
+<div class="container hero-inner">
+<div>
+<span class="pill">신메뉴 출시 <strong>트러플 파스타</strong></span>
+<h1>도시 속 가장 따뜻한 한 끼, <span style="color:var(--accent)">Savory</span></h1>
+<p>현지 제철 재료로 매일 새롭게. 클래식과 모던의 균형을 담은 계절 요리를 경험해 보세요.</p>
+<div class="hero-cta">
+<a class="button cta" href="#reserve">지금 예약</a>
+<a class="button" href="#menu">메뉴 보기</a>
+<span class="chip rating">★★★★☆ <span style="color:#cbd5e1">4.8 (1,284)</span></span>
+</div>
+<div class="chip" style="margin-top:12px">영업: 11:30–22:00 (연중무휴)</div>
+</div>
+<div class="hero-card">
+<img src="https://images.unsplash.com/photo-1553163147-622ab57be1c7?q=80&w=800&auto=format&fit=crop" alt="대표 메뉴 사진">
+<div class="badge">대표 메뉴 • 계절 한정</div>
+</div>
+</div>
+</section>
+
+<section id="about">
+<div class="container">
+<div class="section-head"><h2>About</h2><p>지역 생산자들과 함께 만드는 지속 가능한 식탁</p></div>
+<div class="about">
+<div class="card"><h3>우리의 철학</h3><p>동네 농가의 채소와 공정 무역 재료만을 사용합니다. 집밥 같은 편안함에 한 끗의 놀라움을 더해요.</p>
+<ul><li>국내산 제철 재료 • 제로 웨이스트 지향</li><li>비건/글루텐프리 옵션 제공</li><li>테이크아웃/딜리버리 지원</li></ul></div>
+<div class="card"><h3>시그니처</h3><p>트러플 파스타, 랍스터 비스크, 숯불 스테이크, 유자 타르트</p>
+<div class="grid-2"><div class="chip">오늘의 스프 • ₩8,000</div><div class="chip">런치 세트 • ₩15,000</div></div></div>
+</div>
+</div>
+</section>
+
+<section id="menu">
+<div class="container">
+<div class="section-head"><h2>Menu</h2><p>카테고리 별로 빠르게 살펴보세요</p></div>
+<div class="tabs" role="tablist" aria-label="메뉴 카테고리">
+<button class="tab" role="tab" aria-selected="true" data-cat="all">전체</button>
+<button class="tab" role="tab" aria-selected="false" data-cat="main">메인</button>
+<button class="tab" role="tab" aria-selected="false" data-cat="pasta">파스타</button>
+<button class="tab" role="tab" aria-selected="false" data-cat="dessert">디저트</button>
+<button class="tab" role="tab" aria-selected="false" data-cat="drink">음료</button>
+</div>
+<div class="menu-grid" id="menuGrid" aria-live="polite"></div>
+</div>
+</section>
+
+<section id="gallery">
+<div class="container">
+<div class="section-head"><h2>Gallery</h2><p>공간과 플레이팅 분위기를 미리 구경하세요</p></div>
+<div class="gallery-grid" id="galleryGrid"></div>
+</div>
+</section>
+
+<section id="reviews">
+<div class="container">
+<div class="section-head"><h2>Reviews</h2><p>손님들이 직접 남겨주신 진짜 후기</p></div>
+<div class="slider"><div class="slides" id="slides"></div></div>
+</div>
+</section>
+
+<section id="contact" class="contact">
+<div class="container">
+<div class="section-head"><h2>Contact & Reserve</h2><p>문의/단체예약 환영 • 062-1234-5678</p></div>
+<div class="contact-grid">
+<div class="card">
+<h3 id="reserve">예약하기</h3>
+<form id="reserveForm" novalidate>
+<div class="grid-2">
+<label><input name="name" placeholder="이름" required></label>
+<label><input name="phone" placeholder="전화번호" required pattern="^[0-9\-\+ ]{6,}$"></label>
+</div>
+<div class="grid-2"><input type="date" name="date" required><input type="time" name="time" required></div>
+<div class="grid-2"><input type="number" name="people" min="1" max="12" value="2" required><input type="email" name="email" placeholder="이메일 (선택)"></div>
+<textarea name="note" rows="4" placeholder="요청 사항 (알레르기/좌석 등)"></textarea>
+<button type="submit">예약 요청 보내기</button>
+<p id="reserveMsg" aria-live="polite"></p>
+</form>
+</div>
+<div class="card">
+<h3>오시는 길</h3>
+<p>광주 서구 풍암동 000-00 (가상 주소) • 주차 가능</p>
+<div style="aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08)">
+<iframe title="Map" width="100%" height="100%" style="border:0" loading="lazy" allowfullscreen
+src="https://maps.google.com/maps?q=Gwangju%20Seo-gu&output=embed"></iframe>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="container" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between">
+<div>© <span id="year"></span> Savory. All rights reserved.</div>
+<div style="opacity:.8">Instagram • KakaoTalk • Naver Place</div>
+</div>
+</footer>
+
+<!-- Menu Modal -->
+<div id="menuModal">
+  <div>
+    <button id="modalClose">✖</button>
+    <img id="modalImg" />
+    <h3 id="modalTitle"></h3>
+    <p id="modalDesc" style="color:var(--muted)"></p>
+    <p id="modalPrice" style="color:var(--accent);font-weight:700"></p>
+  </div>
+</div>
+
+<script>
+// Smooth anchor
+document.querySelectorAll('.menu a').forEach(a=>{
+  a.addEventListener('click',e=>{
+    if(a.hash){e.preventDefault();document.querySelector(a.hash).scrollIntoView({behavior:'smooth'});}
+  });
+});
+
+// Intersection Observer 메뉴 활성화
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    const id = entry.target.getAttribute('id');
+    const link = document.querySelector(`.menu a[href="#${id}"]`);
+    if(link) link.classList.toggle('active', entry.isIntersecting);
+  });
+},{rootMargin:'-50% 0px -45% 0px'});
+['about','menu','gallery','reviews','contact'].forEach(id=>io.observe(document.getElementById(id)));
+
+// Mobile menu
+const hamb=document.querySelector('.hamburger');
+const menu=document.querySelector('.menu');
+hamb.addEventListener('click',()=>{
+  const open=getComputedStyle(menu).display==='none';
+  menu.style.display=open?'flex':'none';
+  hamb.setAttribute('aria-expanded',String(open));
+});
+
+// Menu items
+const items=[
+  {cat:'main',title:'숯불 스테이크',price:'₩28,000',img:'https://images.unsplash.com/photo-1553163147-622ab57be1c7',desc:'미디엄 레어, 허브버터'},
+  {cat:'pasta',title:'트러플 파스타',price:'₩19,000',img:'https://images.unsplash.com/photo-1643644598156-858b6d62405b',desc:'트러플 오일 & 파르미지아노'},
+  {cat:'main',title:'연어 그릴',price:'₩22,000',img:'https://images.unsplash.com/photo-1598577789978-b87168a57b69',desc:'레몬버터 소스'},
+  {cat:'dessert',title:'유자 타르트',price:'₩8,500',img:'https://images.unsplash.com/photo-1619051965508-0872c572ee34',desc:'수제 타르트 크러스트'},
+  {cat:'drink',title:'콜드브루',price:'₩5,000',img:'https://images.unsplash.com/photo-1461023058943-07fcbe16d735',desc:'싱글오리진'},
+  {cat:'pasta',title:'봉골레',price:'₩16,000',img:'https://images.unsplash.com/photo-1546549032-9571cd6b27df',desc:'바지락 & 화이트와인'},
+  {cat:'dessert',title:'티라미수',price:'₩7,500',img:'https://images.unsplash.com/photo-1587314168485-3236d6710814',desc:'마스카포네 크림'},
+  {cat:'drink',title:'유자에이드',price:'₩6,000',img:'https://images.unsplash.com/photo-1608910753736-185edb03106f',desc:'상큼달콤 시그니처'}
+];
+
+const grid=document.getElementById('menuGrid');
+function renderMenu(cat='all'){
+  grid.innerHTML='';
+  const filtered = items.filter(i=>cat==='all'?true:i.cat===cat);
+  filtered.forEach(i=>{
+    const el = document.createElement('article');
+    el.className='menu-item';
+    el.innerHTML=`<img src="${i.img}" alt="${i.title}" loading="lazy"/><div><h4>${i.title} <span class="price">• ${i.price}</span></h4><p style="color:var(--muted);margin:0">${i.desc}</p></div>`;
+    el.style.opacity=0;
+    grid.appendChild(el);
+    setTimeout(()=>el.style.transition='opacity .3s ease',0);
+    setTimeout(()=>el.style.opacity=1,50);
+
+    el.addEventListener('click',()=>{
+      const modal=document.getElementById('menuModal');
+      document.getElementById('modalImg').src = i.img;
+      document.getElementById('modalTitle').textContent = i.title;
+      document.getElementById('modalDesc').textContent = i.desc;
+      document.getElementById('modalPrice').textContent = i.price;
+      modal.style.display='flex';
+    });
+  });
+}
+renderMenu();
+
+document.querySelectorAll('.tab').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected','false'));
+    btn.setAttribute('aria-selected','true');
+    renderMenu(btn.dataset.cat);
+  });
+});
+document.getElementById('modalClose').addEventListener('click',()=>{document.getElementById('menuModal').style.display='none';});
+document.addEventListener('keydown',e=>{if(e.key==='Escape') document.getElementById('menuModal').style.display='none';});
+
+// Gallery
+const gallery=[
+'https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=1200&auto=format&fit=crop',
+'https://images.unsplash.com/photo-1526318472351-c75fcf070305?q=80&w=1200&auto=format&fit=crop',
+'https://images.unsplash.com/photo-1481931098730-318b6f776db0?q=80&w=1200&auto=format&fit=crop',
+'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1200&auto=format&fit=crop',
+'https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=1200&auto=format&fit=crop',
+'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1200&auto=format&fit=crop'
+];
+const galleryGrid=document.getElementById('galleryGrid');
+galleryGrid.innerHTML=gallery.map((src,i)=>`<a href="${src}" target="_blank" rel="noopener"><img src="${src}" alt="갤러리 ${i+1}" loading="lazy"/><span>보기</span></a>`).join('');
+galleryGrid.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click', e=>{
+    e.preventDefault();
+    const src = a.href;
+    const lightbox = document.createElement('div');
+    lightbox.className='lightbox';
+    lightbox.innerHTML=`<img src="${src}"><button>✖</button>`;
+    document.body.appendChild(lightbox);
+    lightbox.querySelector('button').addEventListener('click',()=>lightbox.remove());
+    document.addEventListener('keydown',evt=>{if(evt.key==='Escape') lightbox.remove();},{once:true});
+  });
+});
+
+// Reviews
+const reviews=[
+{name:'지윤',msg:'분위기 최고, 데이트 장소로 찰떡이에요. 트러플 향이 미쳤어요!',stars:5},
+{name:'민수',msg:'런치 세트 가성비 갑. 스테이크 굽기도 완벽.',stars:5},
+{name:'수진',msg:'비건 옵션이 다양해서 친구들이랑 다 만족했습니다.',stars:4},
+{name:'태호',msg:'디저트까지 완벽. 재방문 의사 100%!',stars:5},
+];
+const slides=document.getElementById('slides');
+slides.innerHTML=reviews.map(r=>`<figure class="slide"><div class="stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div><blockquote style="margin:8px 0 10px;color:#cbd5e1">“${r.msg}”</blockquote><figcaption style="color:#94a3b8">— ${r.name}</figcaption></figure>`).join('');
+let slideIndex=0;
+function autoSlide(){
+  const slidesEl = document.querySelectorAll('.slide');
+  slidesEl.forEach(s=>s.style.display='none');
+  slidesEl[slideIndex].style.display='block';
+  slideIndex = (slideIndex+1)%slidesEl.length;
+  setTimeout(autoSlide,4000);
+}
+autoSlide();
+
+// Reserve form
+const form=document.getElementById('reserveForm');
+const msg=document.getElementById('reserveMsg');
+form.addEventListener('submit',e=>{
+e.preventDefault();
+if(!form.checkValidity()){msg.textContent='필수 항목을 확인해 주세요.';msg.style.color='#fca5a5';return;}
+const data=Object.fromEntries(new FormData(form).entries());
+msg.textContent=`${data.name}님, ${data.date} ${data.time} • ${data.people}명 예약 요청 접수 완료! 곧 연락드릴게요.`;
+msg.style.color='#86efac';
+form.reset();
+});
+
+// Misc
+document.getElementById('year').textContent=new Date().getFullYear();
+
+// 스크롤 시 헤더 변경
+const header = document.querySelector('header');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) { // 스크롤이 50px 이상 내려가면
+    header.classList.add('scrolled');
+  } else { // 아니면 클래스 제거
+    header.classList.remove('scrolled');
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  margin:0; padding:0; text-align:center;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  min-height:100vh;
+}
+
+header h1 { font-size:3em; margin-bottom:10px; color:#333; text-shadow:2px 2px 10px rgba(0,0,0,0.1);}
+header p { font-size:1.2em; color:#555; max-width:600px; margin:0 auto 30px; line-height:1.5; }
+
+#openModal {
+  padding:18px 40px; font-size:1.2em; border:none; border-radius:12px;
+  background: linear-gradient(90deg, #f0a656, #ffc977); /* 테마 통일 */
+  color:#fff; cursor:pointer; transition:0.3s; box-shadow:0 6px 15px rgba(0,0,0,0.2);
+}
+#openModal:hover { transform:translateY(-4px) scale(1.05); box-shadow:0 12px 25px rgba(0,0,0,0.25); }
+
+.modal {
+  position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+  background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(30,30,30,0.7));
+  backdrop-filter: blur(6px); z-index:1000;
+  display:none;
+}
+
+.modal-content {
+  background:#fefefe; padding:30px; border-radius:20px;
+  max-width:600px; width:90%; position:relative;
+  box-shadow:0 15px 40px rgba(0,0,0,0.35);
+}
+
+.close { position:absolute; top:12px; right:12px; cursor:pointer; font-size:22px; }
+
+.game-container { display:flex; flex-direction:column; align-items:center; gap:12px; }
+
+.card-grid { display:grid; grid-template-columns:repeat(4,80px); gap:14px; justify-content:center; margin:20px 0; }
+.card {
+  width:80px; height:80px; display:flex; align-items:center; justify-content:center;
+  font-size:2em; border-radius:12px; cursor:pointer;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  background:#eee; box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+.card.flipped { transform:rotateY(180deg) scale(1.05); box-shadow:0 8px 20px rgba(0,0,0,0.25); }
+
+.restart-btn {
+  padding:10px 20px; border-radius:8px; border:none;
+  background:#f0a656; color:#fff; cursor:pointer; font-size:1em;
+  transition: background 0.3s;
+}
+.restart-btn:hover { background:#ffc977; }
+.game-complete p { margin-bottom:12px; font-weight:600; font-size:1.1em; color:#333; }

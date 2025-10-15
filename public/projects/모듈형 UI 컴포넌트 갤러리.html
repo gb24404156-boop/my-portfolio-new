@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UI 컴포넌트 콜렉션 · 디자인 시스템</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* 🎨 디자인 토큰 (CSS 변수로 모듈성 확보) */
+:root {
+  --primary: #007bff; /* 주 색상: 밝은 파란색 */
+  --secondary: #6c757d; /* 보조 색상: 회색 */
+  --success: #28a745; /* 성공 */
+  --warning: #ffc107; /* 경고 */
+  --danger: #dc3545; /* 위험 */
+  
+  --bg-main: #f8f9fa; /* 배경: 매우 밝은 회색 */
+  --bg-card: #ffffff; /* 카드 배경 */
+  --text-main: #212529; /* 주 텍스트 */
+  --text-muted: #6c757d; /* 보조 텍스트 */
+  
+  --border-radius: 8px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 🏠 기본 스타일 */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { 
+  font-family: 'Inter', sans-serif; 
+  background: var(--bg-main); 
+  color: var(--text-main); 
+  line-height: 1.6;
+}
+.wrap { max-width: 1100px; margin: 0 auto; padding: 50px 20px; }
+
+/* 📜 제목 및 서브 설명 */
+header { text-align: center; margin-bottom: 50px; }
+header h1 { 
+  font-size: 2.5rem; 
+  margin-bottom: 0.5rem; 
+  color: var(--primary); 
+}
+header p { 
+  font-size: 1.1rem; 
+  color: var(--text-muted); 
+}
+
+/* 🖼️ 컴포넌트 섹션 */
+.component-section {
+  background: var(--bg-card);
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 40px;
+}
+.component-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--primary);
+  display: inline-block;
+  color: var(--text-main);
+}
+.component-showcase {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+  border-top: 1px dashed #e9ecef;
+}
+
+/* --- 컴포넌트 CSS 시작 --- */
+
+/* 1. Button 컴포넌트 */
+.btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+.btn-primary { 
+  background-color: var(--primary); 
+  color: #fff; 
+  border: 1px solid var(--primary); 
+}
+.btn-primary:hover { 
+  background-color: #0056b3; 
+}
+.btn-secondary { 
+  background-color: var(--secondary); 
+  color: #fff; 
+  border: 1px solid var(--secondary); 
+}
+.btn-secondary:hover { 
+  background-color: #5a6268; 
+}
+.btn-outline { 
+  background-color: transparent; 
+  color: var(--primary); 
+  border: 1px solid var(--primary); 
+}
+.btn-outline:hover { 
+  background-color: var(--primary); 
+  color: #fff; 
+}
+.btn:disabled, .btn[disabled] { 
+  opacity: 0.6; 
+  cursor: not-allowed; 
+}
+
+/* 2. Card 컴포넌트 */
+.card-component {
+  width: 300px;
+  border: 1px solid #dee2e6;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.card-component:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-5px);
+}
+.card-header {
+  padding: 15px;
+  background-color: #f1f3f5;
+  font-weight: 700;
+  border-bottom: 1px solid #dee2e6;
+}
+.card-body {
+  padding: 15px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* 3. Badge/Chip 컴포넌트 */
+.badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.badge-primary { 
+  background-color: var(--primary); 
+  color: #fff; 
+}
+.badge-success { 
+  background-color: var(--success); 
+  color: #fff; 
+}
+.badge-warning { 
+  background-color: var(--warning); 
+  color: var(--text-main); 
+}
+
+/* 4. Alert 컴포넌트 */
+.alert {
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  font-size: 0.95rem;
+  width: 100%;
+}
+.alert-info {
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+}
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <h1>UI 컴포넌트 콜렉션 (Design System Showcase)</h1>
+    <p>재사용성과 일관성을 목표로 설계된 HTML/CSS 모듈형 컴포넌트 갤러리입니다.</p>
+  </header>
+
+  <div class="component-section">
+    <h2>버튼 (Button)</h2>
+    <p style="color:var(--text-muted); margin-bottom:15px;">프로젝트의 핵심 액션을 처리하며, 다양한 상태를 정의했습니다.</p>
+    <div class="component-showcase">
+      <a href="#" class="btn btn-primary">Primary Button</a>
+      <a href="#" class="btn btn-secondary">Secondary Button</a>
+      <a href="#" class="btn btn-outline">Outline Button</a>
+      <button class="btn btn-primary" disabled>Disabled Button</button>
+    </div>
+  </div>
+
+  <div class="component-section">
+    <h2>카드 (Card)</h2>
+    <p style="color:var(--text-muted); margin-bottom:15px;">정보를 그룹화하여 보여주며, 그림자 효과로 입체감을 부여했습니다.</p>
+    <div class="component-showcase" style="justify-content: flex-start;">
+      <div class="card-component">
+        <div class="card-header">카드 제목</div>
+        <div class="card-body">
+          <p>
+            디자인 시스템을 위해 설계된 기본 카드 컴포넌트입니다. 콘텐츠를 구분하고 시각적 계층을 형성합니다.
+          </p>
+          <a href="#" class="btn btn-primary" style="margin-top:10px; padding:8px 15px;">자세히 보기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="component-section">
+    <h2>배지 및 알림 (Badge & Alert)</h2>
+    <p style="color:var(--text-muted); margin-bottom:15px;">상태 표시와 사용자 피드백을 위한 컴포넌트입니다.</p>
+    
+    <h3 style="font-size:1.3rem; margin-top:20px; color:var(--text-main);">배지 (Badge)</h3>
+    <div class="component-showcase">
+      <span class="badge badge-primary">New</span>
+      <span class="badge badge-success">Active</span>
+      <span class="badge badge-warning">Pending</span>
+    </div>
+    
+    <h3 style="font-size:1.3rem; margin-top:20px; color:var(--text-main);">알림 (Alert)</h3>
+    <div class="component-showcase" style="flex-direction: column; align-items: flex-start;">
+      <div class="alert alert-info">
+        <strong>정보!</strong> 새로운 소식이 업데이트되었습니다.
+      </div>
+      <div class="alert alert-success">
+        <strong>성공!</strong> 데이터 저장이 완료되었습니다.
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

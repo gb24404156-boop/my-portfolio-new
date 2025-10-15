@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Movie Search — 규범 포트폴리오</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+        <i class="fa-solid fa-camera-movie"></i>
+         <div>
+        <h1><a href="영화검색.html">MovieFind</a></h1>
+        <small>Search • Discover • Preview</small>
+      </div>
+    </div>
+
+    <form id="searchForm" class="search-form" aria-label="영화 검색">
+      <input id="searchInput" type="search" placeholder="Search movies, e.g. Inception" autocomplete="off">
+      <button type="submit"><i class="fas fa-search"></i></button>
+    </form>
+  </header>
+
+  <main class="container">
+    <section class="results-area">
+      <div id="results" class="results-grid" aria-live="polite"></div>
+    </section>
+
+    <aside class="preview-area">
+      <div class="preview-card">
+        <h2 id="previewTitle">선택된 영화 정보</h2>
+        <div id="previewBody" class="preview-body">
+          <p class="muted">영화를 검색하거나 카드 클릭하면 상세 정보와 예고편(있는 경우)을 볼 수 있어</p>
+        </div>
+      </div>
+      <footer class="demo-footer">© 2025 규범 — Movie demo</footer>
+    </aside>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button id="modalClose" class="modal-close"><i class="fas fa-times"></i></button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="scripts/app.js" defer></script>
+</body>
+</html>

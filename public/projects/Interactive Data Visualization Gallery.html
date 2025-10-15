@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>데이터 시각화 갤러리 데모</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="datastyle.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<section>
+  <h2>데이터 시각화 갤러리</h2>
+  <p class="sub">Chart.js와 JavaScript를 활용한 다양한 데이터 표현 방식입니다.</p>
+  
+  <div class="chart-grid">
+    <div class="chart-card">
+      <h3>#1. 실시간 온도 변화 (라인)</h3>
+      <div class="chart-area">
+        <canvas id="chart1"></canvas>
+      </div>
+    </div>
+    
+    <div class="chart-card">
+      <h3>#2. 주간 주가 변동 (바)</h3>
+      <div class="chart-area">
+        <canvas id="chart2"></canvas>
+      </div>
+    </div>
+    
+    <div class="chart-card">
+      <h3>#3. 지역별 인구 비율 (도넛)</h3>
+      <div class="chart-area">
+        <canvas id="chart3"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h3>#4. 시간대별 차량 수 (바)</h3>
+      <div class="chart-area">
+        <canvas id="chart4"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h3>#5. 에너지원 사용량 (레이더)</h3>
+      <div class="chart-area">
+        <canvas id="chart5"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h3>#6. 월별 매출액 (라인)</h3>
+      <div class="chart-area">
+        <canvas id="chart6"></canvas>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script src="datascript.js"></script>
+</body>
+</html>

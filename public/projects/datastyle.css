@@ -1,0 +1,55 @@
+/* 🎨 프로젝트 전용 색상 및 배경 설정 */
+:root {
+  --blue-1: #034AA6; 
+  --blue-2: #049DD9; 
+  --orange: #F28627; 
+  --text: #333;
+  --muted: #778899; 
+  --bg: #f6f8fb; 
+  --card: #fff;
+  --radius: 14px;
+  --shadow: 0 8px 20px rgba(0,0,0,.06);
+}
+
+* { box-sizing: border-box; margin:0; padding:0; }
+body { 
+  font-family: 'Inter', sans-serif; 
+  background: var(--bg); 
+  color: var(--text); 
+  min-height: 100vh;
+}
+a { color:inherit; text-decoration:none; }
+
+/* 섹션/제목 */
+section { max-width:1200px; margin:0 auto; padding:60px 18px; }
+section h2 { text-align:center; font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--blue-1); }
+section p.sub { text-align: center; color: var(--muted); margin-bottom: 40px; } 
+
+/* 그리드 및 카드 */
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+  gap: 30px;
+}
+.chart-card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow); 
+  transition: transform 0.3s ease;
+}
+.chart-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.10);
+}
+.chart-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: var(--blue-1); 
+  border-bottom: 2px solid var(--orange); 
+  padding-bottom: 5px;
+}
+.chart-area {
+  position: relative;
+  height: 250px;
+}
