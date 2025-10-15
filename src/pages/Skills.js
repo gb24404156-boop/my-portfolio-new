@@ -47,7 +47,8 @@ const skillsData = [
   },
 ];
 
-const videoSkills = ['PremierePro', 'AfterEffects'];
+// ⭐ 수정: AfterEffects만 분홍색으로 표시하기 위해 PremierePro 제거
+const videoSkills = ['AfterEffects'];
 
 function ProfileSkills() {
   const [typingIndex, setTypingIndex] = useState(0);
@@ -55,7 +56,7 @@ function ProfileSkills() {
   const [modalSkill, setModalSkill] = useState(null);
   const [progress, setProgress] = useState(0);
 
-  const tagline = '사용자 경험을 고민하며 반응형 웹과 UI를 구현하는 프론트엔드 개발자';
+  const tagline = '사용자 경험을 고민하는 프론트엔드 개발자';
 
   useEffect(() => {
     AOS.init({ once: true, duration: 800 });
@@ -137,7 +138,7 @@ function ProfileSkills() {
                   <span
                     key={j}
                     className={`px-3 py-1 rounded-lg cursor-pointer text-black hover:scale-105 transition ${
-                      videoSkills.includes(skill.title)
+                      videoSkills.includes(skill.title) // ⭐ PremierePro 제거 -> AfterEffects만 분홍색
                         ? 'bg-pink-300 hover:bg-pink-400'
                         : 'bg-yellow-200 hover:bg-yellow-400'
                     }`}
@@ -165,7 +166,8 @@ function ProfileSkills() {
             className="bg-white dark:bg-gray-800 p-6 rounded-xl relative shadow-lg transition-all duration-300 transform scale-100 hover:scale-105"
             style={{
               width: '85%',
-              maxWidth: videoSkills.includes(modalSkill.title) ? '480px' : '520px', // ⭐ 영상은 살짝 작게
+              // ⭐ 수정: AfterEffects만 영상이 나오므로, 해당 스킬만 작게 설정
+              maxWidth: modalSkill.title === 'AfterEffects' ? '480px' : '520px', 
             }}
             onClick={(e) => e.stopPropagation()} // 내부 클릭 시 닫히지 않게
           >
@@ -175,13 +177,10 @@ function ProfileSkills() {
             <h4 className="text-yellow-400 text-xl font-bold mb-2">{modalSkill.title}</h4>
             <p className="text-gray-700 dark:text-gray-300 mb-3">{modalSkill.desc}</p>
 
-            {videoSkills.includes(modalSkill.title) && (
+            {/* ⭐ 수정: PremierePro는 영상 렌더링에서 제외 */}
+            {modalSkill.title === 'AfterEffects' && ( 
               <video
-                src={`/videos/${
-                  modalSkill.title === 'PremierePro'
-                    ? 'billboard_top1_2010_2021'
-                    : '헬로우모션그래픽'
-                }.mp4`}
+                src={`/videos/헬로우모션그래픽.mp4`} // AfterEffects 영상만 남김
                 controls
                 className="w-full rounded mb-3"
               />

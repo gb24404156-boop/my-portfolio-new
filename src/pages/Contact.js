@@ -1,6 +1,7 @@
-// Contact.jsx
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { DiHtml5, DiCss3, DiJavascript1, DiReact, DiJqueryLogo } from 'react-icons/di';
+import { SiAdobeaftereffects } from 'react-icons/si'; // After Effects 아이콘
 
 const slides = [
   'projects/images/미리보기1.jpg',
@@ -11,8 +12,18 @@ const slides = [
   'projects/images/미리보기6.jpg',
   'projects/images/미리보기7.jpg',
   'projects/images/미리보기8.jpg',
-
 ];
+
+// 기술 스택 데이터 정의 (아이콘, 색상 포함)
+const techStacks = [
+  { name: 'HTML5', icon: DiHtml5, color: 'text-orange-500' },
+  { name: 'CSS3', icon: DiCss3, color: 'text-blue-500' },
+  { name: 'JavaScript', icon: DiJavascript1, color: 'text-yellow-400' },
+  { name: 'React', icon: DiReact, color: 'text-cyan-400' },
+  { name: 'jQuery', icon: DiJqueryLogo, color: 'text-blue-700' },
+  { name: 'After Effects', icon: SiAdobeaftereffects, color: 'text-purple-600' },
+];
+
 
 function Contact() {
   const [introIndex, setIntroIndex] = useState(0);
@@ -51,20 +62,23 @@ function Contact() {
           </ul>
         </div>
 
-        {/* 기술 스택 박스 */}
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg flex flex-wrap gap-3 justify-center">
-         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg flex flex-wrap gap-3 justify-center">
-  {['HTML','CSS','JavaScript','React','jQuery','After Effects'].map((tech, i) => (
-    <span 
-      key={i} 
-      className="bg-yellow-300 text-black px-2 py-1 rounded text-base font-medium shadow-sm inline-block"
-    >
-      {tech}
-    </span>
-  ))}
-</div>
-
+        {/* 🌟 수정된 기술 스택 아이콘 박스 🌟 */}
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg flex flex-wrap gap-4 justify-center items-center">
+          {techStacks.map((tech, i) => (
+            <div 
+              key={i} 
+              title={tech.name} 
+              className={`flex flex-col items-center p-2 rounded-lg transition transform hover:scale-110 ${tech.color} dark:text-gray-200`}
+            >
+              {/* 아이콘 렌더링 (크기 48px) */}
+              <tech.icon size={48} className="mb-1"/> 
+              {/* 텍스트 (아이콘 아래에 작게 표시) */}
+              <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">{tech.name}</span>
+            </div>
+          ))}
         </div>
+        {/* 🌟 수정 끝 🌟 */}
+        
       </div>
 
       {/* Bottom Sections */}
@@ -72,24 +86,27 @@ function Contact() {
         {/* Contact CTA */}
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center">
           <h3 className="text-xl md:text-2xl font-bold mb-2 text-gray-900 dark:text-white">Let's Collaborate!</h3>
-          <p className="mb-4 text-gray-700 dark:text-gray-300 text-base md:text-lg">프로젝트나 협업 아이디어가 있다면 언제든 편하게 연락 주세요.</p>
+       <p className="mb-4 text-gray-700 dark:text-gray-300 text-base md:text-lg">
+  프로젝트나 협업 아이디어가 있다면<br />
+  언제든 편하게 연락 주세요.
+</p>
           <button className="px-4 py-2 bg-yellow-400 text-black rounded hover:bg-yellow-500 transition" onClick={() => setModalOpen(true)}>Contact Me</button>
         </div>
 
         {/* Portfolio Highlights */}
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center">
           <h3 className="text-xl md:text-2xl font-bold mb-2 text-gray-900 dark:text-white">Portfolio Highlights</h3>
-          <p className="mb-4 text-gray-700 dark:text-gray-300 text-base md:text-lg">React, HTML/CSS, JS 프로젝트 경험과 인터랙션 디자인 사례를 볼 수 있습니다.</p>
-         <Link to="/projects" className="px-4 py-2 bg-yellow-400 text-black rounded hover:bg-yellow-500 transition">
-  View Portfolio
-</Link>
+          <p className="mb-4 text-gray-700 dark:text-gray-300 text-base md:text-lg">React, HTML/CSS, JS 프로젝트 경험과 디자인 사례를 볼 수 있습니다.</p>
+          <Link to="/projects" className="px-4 py-2 bg-yellow-400 text-black rounded hover:bg-yellow-500 transition">
+            View Portfolio
+          </Link>
         </div>
 
         {/* Follow Me */}
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center">
           <h3 className="text-xl md:text-2xl font-bold mb-2 text-gray-900 dark:text-white">Follow Me</h3>
           <p className="mb-4 text-gray-700 dark:text-gray-300 text-base md:text-lg">포트폴리오 프로젝트를 GitHub에서 확인 가능합니다.</p>
-          <a href="https://github.com/gb24404156-boop/portfolio" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-yellow-400 text-black rounded hover:bg-yellow-500 transition">GitHub link</a>
+          <a href="https://github.com/gb24404156-boop/portfolio" target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-yellow-400 text-black rounded hover:bg-yellow-500 transition">GitHub에서 확인</a>
         </div>
       </div>
 
